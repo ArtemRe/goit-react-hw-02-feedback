@@ -1,37 +1,26 @@
 import PropTypes from 'prop-types';
-import css from 'components/Statistics/Statistics.module.css';
+import { StatisticsWrapp } from './Statistics.styled';
 
-function randomColor() {
-  let color = `#${(Math.random().toString(16) + '000000')
-    .substring(2, 8)
-    .toUpperCase()}80`;
-  return color;
-}
-export const Statistics = ({ title, stats }) => (
-  <section className={css.statistics}>
-    <h2 className={css.title}>{title}</h2>
-
-    <ul className={css.statList}>
-      {stats.map(stat => {
-        return (
-          <li key={stat.id} style={{ backgroundColor: randomColor() }}>
-            <span className={css.label}>{stat.label}</span>
-            <span className={css.quantity}>{stat.percentage}%</span>
-          </li>
-        );
-      })}
-    </ul>
-  </section>
+export const Statistics = ({
+  good,
+  neutral,
+  bad,
+  total,
+  positivePercentage,
+}) => (
+  <StatisticsWrapp>
+    <p>Good: {good}</p>
+    <p>Neutral: {neutral}</p>
+    <p>Bad: {bad}</p>
+    <p>Total: {total} </p>
+    <p>Positive feedback: {positivePercentage}%</p>
+  </StatisticsWrapp>
 );
 
-
 Statistics.propTypes = {
-  title: PropTypes.string,
-  stats: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string,
-      percentage: PropTypes.number,
-    })
-  ),
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
 };
